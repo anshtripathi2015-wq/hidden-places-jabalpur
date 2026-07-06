@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hidden Places of Jabalpur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EAE3D3;
+    --card:#F5F0E4;
+    --ink:#232A1E;
+    --ink-soft:#4A5140;
+    --moss:#48592E;
+    --moss-dark:#333F20;
+    --rust:#A6472B;
+    --gold:#AD8A28;
+    --line: rgba(35,42,30,0.18);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background: var(--gold); color:#fff; }
+
+  a{color:inherit;}
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--moss);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:var(--ink);
+    color:var(--paper);
+    padding:110px 24px 90px;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-radial-gradient(circle at 20% 30%, transparent 0 38px, rgba(234,227,211,0.05) 39px 40px),
+      repeating-radial-gradient(circle at 85% 70%, transparent 0 55px, rgba(234,227,211,0.045) 56px 57px);
+    pointer-events:none;
+  }
+  .hero-inner{ max-width:760px; margin:0 auto; position:relative; }
+  .hero .eyebrow{ color:#C9BE9C; }
+  h1.title{
+    font-family:'Fraunces', serif;
+    font-weight:900;
+    font-optical-sizing:auto;
+    font-size:clamp(42px, 7vw, 78px);
+    line-height:0.98;
+    margin:18px 0 22px;
+    letter-spacing:-0.01em;
+  }
+  h1.title em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--gold);
+  }
+  .hero p.lede{
+    font-size:18px;
+    max-width:520px;
+    color:#DCD5BE;
+  }
+  .hero-note{
+    margin-top:34px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    color:#C9BE9C;
+    border:1px solid rgba(234,227,211,0.25);
+    padding:9px 14px;
+    border-radius:999px;
+  }
+  .hero-note .dot{ width:7px;height:7px;border-radius:50%; background:var(--rust); flex:none; }
+
+  /* ---------- SECTION HEADER ---------- */
+  .section-head{
+    max-width:760px;
+    margin:0 auto;
+    padding:70px 24px 30px;
+  }
+  .section-head h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(30px,4vw,42px);
+    margin:12px 0 10px;
+  }
+  .section-head p{
+    color:var(--ink-soft);
+    max-width:520px;
+    font-size:16px;
+  }
+
+  /* ---------- TRAIL / LIST ---------- */
+  .trail{
+    max-width:760px;
+    margin:0 auto;
+    padding:10px 24px 40px;
+    position:relative;
+  }
+  .trail::before{
+    content:"";
+    position:absolute;
+    left:43px; top:10px; bottom:40px;
+    width:2px;
+    background-image: linear-gradient(var(--ink-soft) 60%, transparent 0%);
+    background-size: 2px 10px;
+    background-repeat:repeat-y;
+    opacity:0.35;
+  }
+
+  .place{
+    position:relative;
+    display:grid;
+    grid-template-columns:86px 1fr;
+    gap:0 22px;
+    margin-bottom:46px;
+  }
+  .pin{
+    width:44px;height:44px;
+    border-radius:50%;
+    background:var(--moss);
+    color:var(--paper);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono', monospace;
+    font-weight:500;
+    font-size:15px;
+    box-shadow:0 0 0 6px var(--paper);
+    position:relative;
+    z-index:1;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:26px 28px 24px;
+  }
+  .card h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:26px;
+    margin:0 0 4px;
+  }
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:8px;
+    margin:12px 0 16px;
+  }
+  .chip{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.03em;
+    padding:5px 10px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+  .badge{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:5px 11px;
+    border-radius:999px;
+    color:#fff;
+    margin-bottom:14px;
+  }
+  .badge.safe{ background:var(--moss); }
+  .badge.moderate{ background:var(--gold); }
+  .badge.adventure{ background:#7A5A22; }
+  .badge.restricted{ background:var(--rust); }
+
+  .card p.desc{
+    margin:0 0 18px;
+    color:var(--ink);
+    font-size:15.5px;
+  }
+  .card ul.notes{
+    margin:0 0 20px;
+    padding-left:18px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .card ul.notes li{ margin-bottom:5px; }
+
+  .maps-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--ink);
+    color:var(--paper) !important;
+    text-decoration:none;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    padding:11px 18px;
+    border-radius:8px;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .maps-btn:hover{ background:var(--moss-dark); transform:translateY(-1px); }
+  .maps-btn svg{ width:14px; height:14px; }
+
+  .remove-place{
+    margin-left:10px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--rust);
+    background:none;
+    border:1px solid var(--rust);
+    border-radius:8px;
+    padding:10px 14px;
+    cursor:pointer;
+  }
+
+  [contenteditable="true"]{
+    outline:1.5px dashed var(--gold);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  /* ---------- ADD PLACE FORM ---------- */
+  .add-form{
+    max-width:760px;
+    margin:0 auto 60px;
+    padding:24px 28px;
+    background:var(--card);
+    border:1px dashed var(--moss);
+    border-radius:14px;
+    display:none;
+  }
+  .add-form.show{ display:block; }
+  .add-form h4{
+    font-family:'Fraunces', serif;
+    margin:0 0 14px;
+    font-size:20px;
+  }
+  .add-form label{
+    display:block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--ink-soft);
+    margin:12px 0 5px;
+  }
+  .add-form input, .add-form textarea, .add-form select{
+    width:100%;
+    font-family:'Work Sans', sans-serif;
+    font-size:14.5px;
+    padding:9px 11px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:#fff;
+    color:var(--ink);
+  }
+  .add-form textarea{ min-height:70px; resize:vertical; }
+  .add-form .actions{ margin-top:18px; display:flex; gap:10px; }
+  .btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    padding:10px 16px;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+  }
+  .btn.primary{ background:var(--moss); color:#fff; }
+  .btn.ghost{ background:transparent; border:1px solid var(--line); color:var(--ink); }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;
+    padding:50px 24px 40px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- EDIT MODE CONTROLS ---------- */
+  #edit-toggle{
+    position:fixed;
+    right:20px; bottom:20px;
+    width:52px;height:52px;
+    border-radius:50%;
+    background:var(--ink);
+    color:var(--paper);
+    border:none;
+    font-size:20px;
+    cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,0.25);
+    z-index:50;
+    display:flex;align-items:center;justify-content:center;
+  }
+  #edit-toggle.active{ background:var(--rust); }
+
+  #edit-bar{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    background:var(--ink);
+    color:var(--paper);
+    padding:14px 20px;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    z-index:49;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+  }
+  #edit-bar.show{ display:flex; }
+
+  @media (max-width:560px){
+    .place{ grid-template-columns:40px 1fr; }
+    .pin{ width:34px;height:34px; font-size:12px; }
+    .trail::before{ left:33px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">A field guide — off the main road</span>
+    <h1 class="title">Hidden Places<br>of <em>Jabalpur</em></h1>
+    <p class="lede">Four spots most maps skip. Waterfalls, a cave, a forest lake — reached on foot, known mostly to the people who live near them.</p>
+    <div class="hero-note"><span class="dot"></span> Some of these need a trek and a group. Read the notes before you go.</div>
+  </div>
+</header>
+
+<section class="section-head">
+  <span class="eyebrow">The list</span>
+  <h2>Hidden Gems of Jabalpur</h2>
+  <p>Tap "Open in Google Maps" to get directions straight to the spot. Every entry lists what's actually there — parking, tickets, trek distance — and nothing more than that.</p>
+</section>
+
+<div class="trail" id="trail"></div>
+
+<div class="add-form" id="add-form">
+  <h4>Add a new place</h4>
+  <label>Place name</label>
+  <input type="text" id="f-name" placeholder="e.g. Bhedaghat">
+  <label>Google Maps link</label>
+  <input type="text" id="f-maps" placeholder="https://maps.app.goo.gl/...">
+  <label>Safety label</label>
+  <select id="f-badge">
+    <option value="safe">Safe</option>
+    <option value="moderate">Moderate</option>
+    <option value="adventure">Adventurous</option>
+    <option value="restricted">Restricted</option>
+  </select>
+  <label>Tags (comma separated — e.g. Short trek, No parking, No tickets)</label>
+  <input type="text" id="f-tags" placeholder="Short trek, No parking, No tickets">
+  <label>Description / notes</label>
+  <textarea id="f-desc" placeholder="Write the details about this place here..."></textarea>
+  <div class="actions">
+    <button class="btn primary" onclick="addPlace()">Add place</button>
+    <button class="btn ghost" onclick="toggleForm(false)">Cancel</button>
+  </div>
+</div>
+
+<footer>
+  Made for wandering off the main road · Jabalpur, MP
+</footer>
+
+<button id="edit-toggle" title="Edit this page">✎</button>
+<div id="edit-bar">
+  <span>Edit mode is on — click any text to change it.</span>
+  <button class="btn primary" onclick="toggleForm(true)">+ Add place</button>
+  <button class="btn ghost" onclick="saveAll()">Save changes</button>
+  <button class="btn ghost" onclick="resetAll()">Reset to default</button>
+</div>
+
+<script>
+/* =========================================================
+   CHANGE THIS PASSWORD TO WHATEVER YOU LIKE
+   ========================================================= */
+const EDIT_PASSWORD = "jabalpur123";
+const STORAGE_KEY = "hidden_places_jabalpur_data";
+
+const defaultPlaces = [
+  {
+    name: "Kalpi Waterfall",
+    maps: "https://maps.app.goo.gl/sQVcrbFqhbLhaGDt7",
+    badge: "safe",
+    badgeLabel: "Safe",
+    tags: ["Beside Mandla Highway", "No parking", "Short forest trek"],
+    desc: "Located right beside the Mandla Highway. There's no parking facility, and you'll need to do a short trek through the forest to reach it. Not a place to visit alone — go with friends or in a group. It's a safe place overall, no real risk involved."
+  },
+  {
+    name: "Naktiya Cave",
+    maps: "https://maps.app.goo.gl/JrtvPrxMm8BruMdR8",
+    badge: "adventure",
+    badgeLabel: "Adventurous",
+    tags: ["Located in Saliwada", "2–3 km trek", "No parking", "No ticket charges"],
+    desc: "A bit far out, located in Saliwada. You'll need to trek about 2–3 km to get there — go in a group, as this is an adventurous spot. Bears or leopards are occasionally seen in the area, but it's manageable. A few villagers live nearby. No parking facility and no ticket charges."
+  },
+  {
+    name: "Sunderpur Waterfall",
+    maps: "https://maps.app.goo.gl/UrsVMCRWzirU61RP6",
+    badge: "moderate",
+    badgeLabel: "Moderate",
+    tags: ["Best in monsoon", "Off-road", "No parking", "No ticket charges"],
+    desc: "A great spot, best visited during the monsoon season. It's an off-road location with no parking facility, no ticket charges, and no other facilities available on site."
+  },
+  {
+    name: "Thakur Tal",
+    maps: "https://maps.app.goo.gl/hviX6DAPU7K5PnKC6",
+    badge: "restricted",
+    badgeLabel: "Restricted",
+    tags: ["Forest Department land", "500m hill trek", "No parking"],
+    desc: "Visiting here is restricted since it falls under Forest Department land, so it can be risky — but many people still visit anyway. Leopards are also found in the area, so go entirely at your own risk. There's no parking facility, and you'll need to do a hill trek of around 500 metres."
+  }
+];
+
+let places = [];
+let editMode = false;
+
+function loadData(){
+  const saved = localStorage.getItem(STORAGE_KEY);
+  places = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(defaultPlaces));
+}
+
+function mapsIconSVG(){
+  return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 7 11.5 7.3 11.8.2.2.5.2.7 0C12.3 21.5 20 15.4 20 10c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>';
+}
+
+function render(){
+  const trail = document.getElementById('trail');
+  trail.innerHTML = '';
+  places.forEach((p, i) => {
+    const el = document.createElement('div');
+    el.className = 'place';
+    el.innerHTML = `
+      <div class="pin">${String(i+1).padStart(2,'0')}</div>
+      <div class="card">
+        <span class="badge ${p.badge}" ${editMode ? '' : ''}>${p.badgeLabel}</span>
+        <h3 ${editMode ? 'contenteditable="true"' : ''} data-field="name" data-i="${i}">${p.name}</h3>
+        <div class="meta-row">
+          ${p.tags.map(t => `<span class="chip">${t}</span>`).join('')}
+        </div>
+        <p class="desc" ${editMode ? 'contenteditable="true"' : ''} data-field="desc" data-i="${i}">${p.desc}</p>
+        <a class="maps-btn" href="${p.maps}" target="_blank" rel="noopener">${mapsIconSVG()} Open in Google Maps</a>
+        ${editMode ? `<button class="remove-place" onclick="removePlace(${i})">Remove</button>` : ''}
+      </div>
+    `;
+    trail.appendChild(el);
+  });
+}
+
+function removePlace(i){
+  if(confirm('Remove "' + places[i].name + '" from the list?')){
+    places.splice(i,1);
+    render();
+  }
+}
+
+function toggleForm(show){
+  document.getElementById('add-form').classList.toggle('show', show);
+}
+
+function addPlace(){
+  const name = document.getElementById('f-name').value.trim();
+  const maps = document.getElementById('f-maps').value.trim();
+  const badge = document.getElementById('f-badge').value;
+  const badgeLabels = {safe:'Safe', moderate:'Moderate', adventure:'Adventurous', restricted:'Restricted'};
+  const tags = document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const desc = document.getElementById('f-desc').value.trim();
+
+  if(!name || !maps || !desc){
+    alert('Please fill in at least the name, maps link, and description.');
+    return;
+  }
+
+  places.push({ name, maps, badge, badgeLabel: badgeLabels[badge], tags, desc });
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-maps').value = '';
+  document.getElementById('f-tags').value = '';
+  document.getElementById('f-desc').value = '';
+  toggleForm(false);
+  render();
+}
+
+function saveAll(){
+  // pull in any edited text before saving
+  document.querySelectorAll('[data-field]').forEach(elm => {
+    const i = elm.getAttribute('data-i');
+    const field = elm.getAttribute('data-field');
+    places[i][field] = elm.innerText;
+  });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(places));
+  alert('Saved! Your changes will stay even if you close and reopen this page in this browser.');
+}
+
+function resetAll(){
+  if(confirm('Reset the whole list back to the original 4 places? This cannot be undone.')){
+    localStorage.removeItem(STORAGE_KEY);
+    loadData();
+    render();
+  }
+}
+
+document.getElementById('edit-toggle').addEventListener('click', () => {
+  if(!editMode){
+    const pass = prompt('Enter the edit password:');
+    if(pass !== EDIT_PASSWORD){
+      if(pass !== null) alert('Wrong password.');
+      return;
+    }
+    editMode = true;
+  } else {
+    editMode = false;
+  }
+  document.getElementById('edit-toggle').classList.toggle('active', editMode);
+  document.getElementById('edit-bar').classList.toggle('show', editMode);
+  if(!editMode) toggleForm(false);
+  render();
+});
+
+loadData();
+render();
+</script>
+
+</body>
+</html>
